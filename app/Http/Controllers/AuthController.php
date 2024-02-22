@@ -8,4 +8,9 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     use HttpResponses;
+
+    public function login()
+    {
+        return "This is login method of AuthController class";
+    }
 }
