@@ -11,6 +11,11 @@ class AuthController extends Controller
 
     public function login()
     {
-        return "This is login method of AuthController class";
+        return "This is LOGIN method of AuthController class";
+    }
+
+    public function register()
+    {
+        return response()->json('This is REGISTER method of AuthController class');
     }
 }
