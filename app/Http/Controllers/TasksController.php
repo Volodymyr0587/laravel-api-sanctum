@@ -45,10 +45,7 @@ class TasksController extends Controller
      */
     public function show(Task $task)
     {
-        if (Auth::user()->id !== $task->user->id) {
-            return $this->error('', 'You are not authorized to make this request', 403);
-        }
-        return new TaskResource($task);
+        return $this->isNotAuthorized($task) ? $this->isNotAuthorized($task) : new TaskResource($task);
     }
 
     /**
@@ -68,8 +65,15 @@ class TasksController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
-        //
+        return $this->isNotAuthorized($task) ? $this->isNotAuthorized($task) : $task->delete();
+    }
+
+    private function isNotAuthorized($task)
+    {
+        if (Auth::user()->id !== $task->user->id) {
+            return $this->error('', 'You are not authorized to make this request', 403);
+        }
     }
 }
