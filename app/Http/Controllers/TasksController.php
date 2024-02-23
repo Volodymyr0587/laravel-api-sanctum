@@ -45,7 +45,7 @@ class TasksController extends Controller
      */
     public function show(Task $task)
     {
-        if (Auth::user()->id !== $task->user_id) {
+        if (Auth::user()->id !== $task->user->id) {
             return $this->error('', 'You are not authorized to make this request', 403);
         }
         return new TaskResource($task);
